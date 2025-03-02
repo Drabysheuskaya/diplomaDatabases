@@ -1,0 +1,330 @@
+is_global = true
+build_property.MudDebugAnalyzer = 
+build_property.MudAllowedAttributePattern = 
+build_property.MudIllegalParameters = 
+build_property.TargetFramework = net8.0
+build_property.TargetPlatformMinVersion = 
+build_property.UsingMicrosoftNETSdkWeb = true
+build_property.ProjectTypeGuids = 
+build_property.InvariantGlobalization = 
+build_property.PlatformNeutralAssembly = 
+build_property.EnforceExtendedAnalyzerRules = 
+build_property._SupportedPlatformList = Linux,macOS,Windows
+build_property.RootNamespace = MnemonicsTakeTwo
+build_property.RootNamespace = MnemonicsTakeTwo
+build_property.ProjectDir = /Users/darynadrabysheuskaya/Downloads/MnemonicsTakeTwo-2/MnemonicsTakeTwo/MnemonicsTakeTwo/
+build_property.EnableComHosting = 
+build_property.EnableGeneratedComInterfaceComImportInterop = 
+build_property.RazorLangVersion = 8.0
+build_property.SupportLocalizedComponentNames = 
+build_property.GenerateRazorMetadataSourceChecksumAttributes = 
+build_property.MSBuildProjectDirectory = /Users/darynadrabysheuskaya/Downloads/MnemonicsTakeTwo-2/MnemonicsTakeTwo/MnemonicsTakeTwo
+build_property._RazorSourceGeneratorDebug = 
+
+[/Users/darynadrabysheuskaya/Downloads/MnemonicsTakeTwo-2/MnemonicsTakeTwo/MnemonicsTakeTwo/Components/Account/Pages/AccessDenied.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50cy9BY2NvdW50L1BhZ2VzL0FjY2Vzc0RlbmllZC5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/darynadrabysheuskaya/Downloads/MnemonicsTakeTwo-2/MnemonicsTakeTwo/MnemonicsTakeTwo/Components/Account/Pages/ConfirmEmail.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50cy9BY2NvdW50L1BhZ2VzL0NvbmZpcm1FbWFpbC5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/darynadrabysheuskaya/Downloads/MnemonicsTakeTwo-2/MnemonicsTakeTwo/MnemonicsTakeTwo/Components/Account/Pages/ConfirmEmailChange.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50cy9BY2NvdW50L1BhZ2VzL0NvbmZpcm1FbWFpbENoYW5nZS5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/darynadrabysheuskaya/Downloads/MnemonicsTakeTwo-2/MnemonicsTakeTwo/MnemonicsTakeTwo/Components/Account/Pages/ExternalLogin.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50cy9BY2NvdW50L1BhZ2VzL0V4dGVybmFsTG9naW4ucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/darynadrabysheuskaya/Downloads/MnemonicsTakeTwo-2/MnemonicsTakeTwo/MnemonicsTakeTwo/Components/Account/Pages/ForgotPassword.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50cy9BY2NvdW50L1BhZ2VzL0ZvcmdvdFBhc3N3b3JkLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/darynadrabysheuskaya/Downloads/MnemonicsTakeTwo-2/MnemonicsTakeTwo/MnemonicsTakeTwo/Components/Account/Pages/ForgotPasswordConfirmation.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50cy9BY2NvdW50L1BhZ2VzL0ZvcmdvdFBhc3N3b3JkQ29uZmlybWF0aW9uLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/darynadrabysheuskaya/Downloads/MnemonicsTakeTwo-2/MnemonicsTakeTwo/MnemonicsTakeTwo/Components/Account/Pages/InvalidPasswordReset.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50cy9BY2NvdW50L1BhZ2VzL0ludmFsaWRQYXNzd29yZFJlc2V0LnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/darynadrabysheuskaya/Downloads/MnemonicsTakeTwo-2/MnemonicsTakeTwo/MnemonicsTakeTwo/Components/Account/Pages/InvalidUser.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50cy9BY2NvdW50L1BhZ2VzL0ludmFsaWRVc2VyLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/darynadrabysheuskaya/Downloads/MnemonicsTakeTwo-2/MnemonicsTakeTwo/MnemonicsTakeTwo/Components/Account/Pages/Lockout.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50cy9BY2NvdW50L1BhZ2VzL0xvY2tvdXQucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/darynadrabysheuskaya/Downloads/MnemonicsTakeTwo-2/MnemonicsTakeTwo/MnemonicsTakeTwo/Components/Account/Pages/Login.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50cy9BY2NvdW50L1BhZ2VzL0xvZ2luLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/darynadrabysheuskaya/Downloads/MnemonicsTakeTwo-2/MnemonicsTakeTwo/MnemonicsTakeTwo/Components/Account/Pages/LoginWith2fa.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50cy9BY2NvdW50L1BhZ2VzL0xvZ2luV2l0aDJmYS5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/darynadrabysheuskaya/Downloads/MnemonicsTakeTwo-2/MnemonicsTakeTwo/MnemonicsTakeTwo/Components/Account/Pages/LoginWithRecoveryCode.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50cy9BY2NvdW50L1BhZ2VzL0xvZ2luV2l0aFJlY292ZXJ5Q29kZS5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/darynadrabysheuskaya/Downloads/MnemonicsTakeTwo-2/MnemonicsTakeTwo/MnemonicsTakeTwo/Components/Account/Pages/Manage/ChangePassword.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50cy9BY2NvdW50L1BhZ2VzL01hbmFnZS9DaGFuZ2VQYXNzd29yZC5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/darynadrabysheuskaya/Downloads/MnemonicsTakeTwo-2/MnemonicsTakeTwo/MnemonicsTakeTwo/Components/Account/Pages/Manage/DeletePersonalData.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50cy9BY2NvdW50L1BhZ2VzL01hbmFnZS9EZWxldGVQZXJzb25hbERhdGEucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/darynadrabysheuskaya/Downloads/MnemonicsTakeTwo-2/MnemonicsTakeTwo/MnemonicsTakeTwo/Components/Account/Pages/Manage/Disable2fa.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50cy9BY2NvdW50L1BhZ2VzL01hbmFnZS9EaXNhYmxlMmZhLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/darynadrabysheuskaya/Downloads/MnemonicsTakeTwo-2/MnemonicsTakeTwo/MnemonicsTakeTwo/Components/Account/Pages/Manage/Email.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50cy9BY2NvdW50L1BhZ2VzL01hbmFnZS9FbWFpbC5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/darynadrabysheuskaya/Downloads/MnemonicsTakeTwo-2/MnemonicsTakeTwo/MnemonicsTakeTwo/Components/Account/Pages/Manage/EnableAuthenticator.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50cy9BY2NvdW50L1BhZ2VzL01hbmFnZS9FbmFibGVBdXRoZW50aWNhdG9yLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/darynadrabysheuskaya/Downloads/MnemonicsTakeTwo-2/MnemonicsTakeTwo/MnemonicsTakeTwo/Components/Account/Pages/Manage/ExternalLogins.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50cy9BY2NvdW50L1BhZ2VzL01hbmFnZS9FeHRlcm5hbExvZ2lucy5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/darynadrabysheuskaya/Downloads/MnemonicsTakeTwo-2/MnemonicsTakeTwo/MnemonicsTakeTwo/Components/Account/Pages/Manage/GenerateRecoveryCodes.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50cy9BY2NvdW50L1BhZ2VzL01hbmFnZS9HZW5lcmF0ZVJlY292ZXJ5Q29kZXMucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/darynadrabysheuskaya/Downloads/MnemonicsTakeTwo-2/MnemonicsTakeTwo/MnemonicsTakeTwo/Components/Account/Pages/Manage/Index.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50cy9BY2NvdW50L1BhZ2VzL01hbmFnZS9JbmRleC5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/darynadrabysheuskaya/Downloads/MnemonicsTakeTwo-2/MnemonicsTakeTwo/MnemonicsTakeTwo/Components/Account/Pages/Manage/PersonalData.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50cy9BY2NvdW50L1BhZ2VzL01hbmFnZS9QZXJzb25hbERhdGEucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/darynadrabysheuskaya/Downloads/MnemonicsTakeTwo-2/MnemonicsTakeTwo/MnemonicsTakeTwo/Components/Account/Pages/Manage/ResetAuthenticator.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50cy9BY2NvdW50L1BhZ2VzL01hbmFnZS9SZXNldEF1dGhlbnRpY2F0b3IucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/darynadrabysheuskaya/Downloads/MnemonicsTakeTwo-2/MnemonicsTakeTwo/MnemonicsTakeTwo/Components/Account/Pages/Manage/SetPassword.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50cy9BY2NvdW50L1BhZ2VzL01hbmFnZS9TZXRQYXNzd29yZC5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/darynadrabysheuskaya/Downloads/MnemonicsTakeTwo-2/MnemonicsTakeTwo/MnemonicsTakeTwo/Components/Account/Pages/Manage/TwoFactorAuthentication.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50cy9BY2NvdW50L1BhZ2VzL01hbmFnZS9Ud29GYWN0b3JBdXRoZW50aWNhdGlvbi5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/darynadrabysheuskaya/Downloads/MnemonicsTakeTwo-2/MnemonicsTakeTwo/MnemonicsTakeTwo/Components/Account/Pages/Manage/_Imports.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50cy9BY2NvdW50L1BhZ2VzL01hbmFnZS9fSW1wb3J0cy5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/darynadrabysheuskaya/Downloads/MnemonicsTakeTwo-2/MnemonicsTakeTwo/MnemonicsTakeTwo/Components/Account/Pages/Register.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50cy9BY2NvdW50L1BhZ2VzL1JlZ2lzdGVyLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/darynadrabysheuskaya/Downloads/MnemonicsTakeTwo-2/MnemonicsTakeTwo/MnemonicsTakeTwo/Components/Account/Pages/RegisterConfirmation.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50cy9BY2NvdW50L1BhZ2VzL1JlZ2lzdGVyQ29uZmlybWF0aW9uLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/darynadrabysheuskaya/Downloads/MnemonicsTakeTwo-2/MnemonicsTakeTwo/MnemonicsTakeTwo/Components/Account/Pages/ResendEmailConfirmation.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50cy9BY2NvdW50L1BhZ2VzL1Jlc2VuZEVtYWlsQ29uZmlybWF0aW9uLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/darynadrabysheuskaya/Downloads/MnemonicsTakeTwo-2/MnemonicsTakeTwo/MnemonicsTakeTwo/Components/Account/Pages/ResetPassword.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50cy9BY2NvdW50L1BhZ2VzL1Jlc2V0UGFzc3dvcmQucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/darynadrabysheuskaya/Downloads/MnemonicsTakeTwo-2/MnemonicsTakeTwo/MnemonicsTakeTwo/Components/Account/Pages/ResetPasswordConfirmation.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50cy9BY2NvdW50L1BhZ2VzL1Jlc2V0UGFzc3dvcmRDb25maXJtYXRpb24ucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/darynadrabysheuskaya/Downloads/MnemonicsTakeTwo-2/MnemonicsTakeTwo/MnemonicsTakeTwo/Components/Account/Pages/_Imports.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50cy9BY2NvdW50L1BhZ2VzL19JbXBvcnRzLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/darynadrabysheuskaya/Downloads/MnemonicsTakeTwo-2/MnemonicsTakeTwo/MnemonicsTakeTwo/Components/Account/Shared/AccountLayout.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50cy9BY2NvdW50L1NoYXJlZC9BY2NvdW50TGF5b3V0LnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/darynadrabysheuskaya/Downloads/MnemonicsTakeTwo-2/MnemonicsTakeTwo/MnemonicsTakeTwo/Components/Account/Shared/ExternalLoginPicker.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50cy9BY2NvdW50L1NoYXJlZC9FeHRlcm5hbExvZ2luUGlja2VyLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/darynadrabysheuskaya/Downloads/MnemonicsTakeTwo-2/MnemonicsTakeTwo/MnemonicsTakeTwo/Components/Account/Shared/ManageLayout.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50cy9BY2NvdW50L1NoYXJlZC9NYW5hZ2VMYXlvdXQucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/darynadrabysheuskaya/Downloads/MnemonicsTakeTwo-2/MnemonicsTakeTwo/MnemonicsTakeTwo/Components/Account/Shared/ManageNavMenu.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50cy9BY2NvdW50L1NoYXJlZC9NYW5hZ2VOYXZNZW51LnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/darynadrabysheuskaya/Downloads/MnemonicsTakeTwo-2/MnemonicsTakeTwo/MnemonicsTakeTwo/Components/Account/Shared/ShowRecoveryCodes.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50cy9BY2NvdW50L1NoYXJlZC9TaG93UmVjb3ZlcnlDb2Rlcy5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/darynadrabysheuskaya/Downloads/MnemonicsTakeTwo-2/MnemonicsTakeTwo/MnemonicsTakeTwo/Components/Account/Shared/StatusMessage.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50cy9BY2NvdW50L1NoYXJlZC9TdGF0dXNNZXNzYWdlLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/darynadrabysheuskaya/Downloads/MnemonicsTakeTwo-2/MnemonicsTakeTwo/MnemonicsTakeTwo/Components/App.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50cy9BcHAucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/darynadrabysheuskaya/Downloads/MnemonicsTakeTwo-2/MnemonicsTakeTwo/MnemonicsTakeTwo/Components/Pages/AddCategoryDialog.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50cy9QYWdlcy9BZGRDYXRlZ29yeURpYWxvZy5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/darynadrabysheuskaya/Downloads/MnemonicsTakeTwo-2/MnemonicsTakeTwo/MnemonicsTakeTwo/Components/Pages/AddDepartmentDialog.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50cy9QYWdlcy9BZGREZXBhcnRtZW50RGlhbG9nLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/darynadrabysheuskaya/Downloads/MnemonicsTakeTwo-2/MnemonicsTakeTwo/MnemonicsTakeTwo/Components/Pages/AddGroupDialog.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50cy9QYWdlcy9BZGRHcm91cERpYWxvZy5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/darynadrabysheuskaya/Downloads/MnemonicsTakeTwo-2/MnemonicsTakeTwo/MnemonicsTakeTwo/Components/Pages/AddMnemonic.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50cy9QYWdlcy9BZGRNbmVtb25pYy5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/darynadrabysheuskaya/Downloads/MnemonicsTakeTwo-2/MnemonicsTakeTwo/MnemonicsTakeTwo/Components/Pages/AddMnemonicAsStudent.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50cy9QYWdlcy9BZGRNbmVtb25pY0FzU3R1ZGVudC5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/darynadrabysheuskaya/Downloads/MnemonicsTakeTwo-2/MnemonicsTakeTwo/MnemonicsTakeTwo/Components/Pages/ApproveRequestedMnemonics.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50cy9QYWdlcy9BcHByb3ZlUmVxdWVzdGVkTW5lbW9uaWNzLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/darynadrabysheuskaya/Downloads/MnemonicsTakeTwo-2/MnemonicsTakeTwo/MnemonicsTakeTwo/Components/Pages/AssignRoles.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50cy9QYWdlcy9Bc3NpZ25Sb2xlcy5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/darynadrabysheuskaya/Downloads/MnemonicsTakeTwo-2/MnemonicsTakeTwo/MnemonicsTakeTwo/Components/Pages/Categories.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50cy9QYWdlcy9DYXRlZ29yaWVzLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/darynadrabysheuskaya/Downloads/MnemonicsTakeTwo-2/MnemonicsTakeTwo/MnemonicsTakeTwo/Components/Pages/CategoryMnemonics.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50cy9QYWdlcy9DYXRlZ29yeU1uZW1vbmljcy5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/darynadrabysheuskaya/Downloads/MnemonicsTakeTwo-2/MnemonicsTakeTwo/MnemonicsTakeTwo/Components/Pages/ConfirmDialog.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50cy9QYWdlcy9Db25maXJtRGlhbG9nLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/darynadrabysheuskaya/Downloads/MnemonicsTakeTwo-2/MnemonicsTakeTwo/MnemonicsTakeTwo/Components/Pages/Departments.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50cy9QYWdlcy9EZXBhcnRtZW50cy5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/darynadrabysheuskaya/Downloads/MnemonicsTakeTwo-2/MnemonicsTakeTwo/MnemonicsTakeTwo/Components/Pages/EditCategory.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50cy9QYWdlcy9FZGl0Q2F0ZWdvcnkucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/darynadrabysheuskaya/Downloads/MnemonicsTakeTwo-2/MnemonicsTakeTwo/MnemonicsTakeTwo/Components/Pages/EditDepartment.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50cy9QYWdlcy9FZGl0RGVwYXJ0bWVudC5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/darynadrabysheuskaya/Downloads/MnemonicsTakeTwo-2/MnemonicsTakeTwo/MnemonicsTakeTwo/Components/Pages/EditGroup.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50cy9QYWdlcy9FZGl0R3JvdXAucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/darynadrabysheuskaya/Downloads/MnemonicsTakeTwo-2/MnemonicsTakeTwo/MnemonicsTakeTwo/Components/Pages/EditMnemonic.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50cy9QYWdlcy9FZGl0TW5lbW9uaWMucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/darynadrabysheuskaya/Downloads/MnemonicsTakeTwo-2/MnemonicsTakeTwo/MnemonicsTakeTwo/Components/Pages/EditRequestedMnemonic.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50cy9QYWdlcy9FZGl0UmVxdWVzdGVkTW5lbW9uaWMucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/darynadrabysheuskaya/Downloads/MnemonicsTakeTwo-2/MnemonicsTakeTwo/MnemonicsTakeTwo/Components/Pages/Error.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50cy9QYWdlcy9FcnJvci5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/darynadrabysheuskaya/Downloads/MnemonicsTakeTwo-2/MnemonicsTakeTwo/MnemonicsTakeTwo/Components/Pages/FavoriteMnemonicsPage.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50cy9QYWdlcy9GYXZvcml0ZU1uZW1vbmljc1BhZ2UucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/darynadrabysheuskaya/Downloads/MnemonicsTakeTwo-2/MnemonicsTakeTwo/MnemonicsTakeTwo/Components/Pages/GroupMnemonics.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50cy9QYWdlcy9Hcm91cE1uZW1vbmljcy5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/darynadrabysheuskaya/Downloads/MnemonicsTakeTwo-2/MnemonicsTakeTwo/MnemonicsTakeTwo/Components/Pages/GroupMnemonicsFlashcards.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50cy9QYWdlcy9Hcm91cE1uZW1vbmljc0ZsYXNoY2FyZHMucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/darynadrabysheuskaya/Downloads/MnemonicsTakeTwo-2/MnemonicsTakeTwo/MnemonicsTakeTwo/Components/Pages/GroupMnemonicsResults.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50cy9QYWdlcy9Hcm91cE1uZW1vbmljc1Jlc3VsdHMucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/darynadrabysheuskaya/Downloads/MnemonicsTakeTwo-2/MnemonicsTakeTwo/MnemonicsTakeTwo/Components/Pages/Groups.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50cy9QYWdlcy9Hcm91cHMucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/darynadrabysheuskaya/Downloads/MnemonicsTakeTwo-2/MnemonicsTakeTwo/MnemonicsTakeTwo/Components/Pages/Home.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50cy9QYWdlcy9Ib21lLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/darynadrabysheuskaya/Downloads/MnemonicsTakeTwo-2/MnemonicsTakeTwo/MnemonicsTakeTwo/Components/Pages/JoinGroupDialog.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50cy9QYWdlcy9Kb2luR3JvdXBEaWFsb2cucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/darynadrabysheuskaya/Downloads/MnemonicsTakeTwo-2/MnemonicsTakeTwo/MnemonicsTakeTwo/Components/Pages/ListMnemonicsEdit.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50cy9QYWdlcy9MaXN0TW5lbW9uaWNzRWRpdC5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/darynadrabysheuskaya/Downloads/MnemonicsTakeTwo-2/MnemonicsTakeTwo/MnemonicsTakeTwo/Components/Pages/ManageDepartmentsAndCategories.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50cy9QYWdlcy9NYW5hZ2VEZXBhcnRtZW50c0FuZENhdGVnb3JpZXMucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/darynadrabysheuskaya/Downloads/MnemonicsTakeTwo-2/MnemonicsTakeTwo/MnemonicsTakeTwo/Components/Pages/ManageGroups.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50cy9QYWdlcy9NYW5hZ2VHcm91cHMucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/darynadrabysheuskaya/Downloads/MnemonicsTakeTwo-2/MnemonicsTakeTwo/MnemonicsTakeTwo/Components/Pages/MnemonicPage.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50cy9QYWdlcy9NbmVtb25pY1BhZ2UucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/darynadrabysheuskaya/Downloads/MnemonicsTakeTwo-2/MnemonicsTakeTwo/MnemonicsTakeTwo/Components/Pages/RemoveMnemonicsDialog.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50cy9QYWdlcy9SZW1vdmVNbmVtb25pY3NEaWFsb2cucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/darynadrabysheuskaya/Downloads/MnemonicsTakeTwo-2/MnemonicsTakeTwo/MnemonicsTakeTwo/Components/Pages/SelectDepartment.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50cy9QYWdlcy9TZWxlY3REZXBhcnRtZW50LnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/darynadrabysheuskaya/Downloads/MnemonicsTakeTwo-2/MnemonicsTakeTwo/MnemonicsTakeTwo/Components/Pages/SelectDepartmentDialog.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50cy9QYWdlcy9TZWxlY3REZXBhcnRtZW50RGlhbG9nLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/darynadrabysheuskaya/Downloads/MnemonicsTakeTwo-2/MnemonicsTakeTwo/MnemonicsTakeTwo/Components/Pages/SelectDepartmentEdit.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50cy9QYWdlcy9TZWxlY3REZXBhcnRtZW50RWRpdC5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/darynadrabysheuskaya/Downloads/MnemonicsTakeTwo-2/MnemonicsTakeTwo/MnemonicsTakeTwo/Components/Pages/SelectMnemonicsDialog.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50cy9QYWdlcy9TZWxlY3RNbmVtb25pY3NEaWFsb2cucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/darynadrabysheuskaya/Downloads/MnemonicsTakeTwo-2/MnemonicsTakeTwo/MnemonicsTakeTwo/Components/Pages/UserRoles.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50cy9QYWdlcy9Vc2VyUm9sZXMucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/darynadrabysheuskaya/Downloads/MnemonicsTakeTwo-2/MnemonicsTakeTwo/MnemonicsTakeTwo/Components/Pages/Weather.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50cy9QYWdlcy9XZWF0aGVyLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/darynadrabysheuskaya/Downloads/MnemonicsTakeTwo-2/MnemonicsTakeTwo/MnemonicsTakeTwo/Components/Routes.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50cy9Sb3V0ZXMucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/darynadrabysheuskaya/Downloads/MnemonicsTakeTwo-2/MnemonicsTakeTwo/MnemonicsTakeTwo/Components/_Imports.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50cy9fSW1wb3J0cy5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/darynadrabysheuskaya/Downloads/MnemonicsTakeTwo-2/MnemonicsTakeTwo/MnemonicsTakeTwo/Components/Layout/MainLayout.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50cy9MYXlvdXQvTWFpbkxheW91dC5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = b-m896cgyo70
+
+[/Users/darynadrabysheuskaya/Downloads/MnemonicsTakeTwo-2/MnemonicsTakeTwo/MnemonicsTakeTwo/Components/Layout/NavMenu.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50cy9MYXlvdXQvTmF2TWVudS5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = b-xjt51x4cgn

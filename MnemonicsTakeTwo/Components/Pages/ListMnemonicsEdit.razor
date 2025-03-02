@@ -1,0 +1,59 @@
+﻿@rendermode InteractiveServer
+@page "/mnemonics-edit/{departmentId:int}"
+@using MnemonicsTakeTwo.Data
+@using MnemonicsTakeTwo.Services
+@inject ICategoryMnemonicService CategoryMnemonicService
+@inject NavigationManager Navigation
+@inject ICategoryService CategoryService
+@using Microsoft.AspNetCore.Authorization
+@attribute [Authorize]
+
+<h3>Mnemonics for Department</h3>
+
+@if (mnemonics == null)
+{
+    <p>Loading...</p>
+}
+else if (mnemonics.Count == 0)
+{
+    <p>No mnemonics found for this department.</p>
+}
+else
+{
+    <MudTable Items="mnemonics" Hover="true">
+        <HeaderContent>
+            <MudTh>Name</MudTh>
+            <MudTh>Phrase</MudTh>
+            <MudTh>Description</MudTh>
+            <MudTh>Actions</MudTh>
+        </HeaderContent>
+        <RowTemplate>
+            <MudTd DataLabel="Name">@context.Name</MudTd>
+            <MudTd DataLabel="Phrase">@context.Phrase</MudTd>
+            <MudTd DataLabel="Description">@context.Description</MudTd>
+            <MudTd DataLabel="Actions">
+                <MudButton Variant="Variant.Filled" Color="Color.Primary" OnClick="() => EditMnemonic(context.Id)">Edit</MudButton>
+            </MudTd>
+        </RowTemplate>
+    </MudTable>
+}
+
+@code {
+    [Parameter]
+    public int departmentId { get; set; }
+    private List<Mnemonic> mnemonics;
+
+    protected override async Task OnInitializedAsync()
+    {
+        var categories = await CategoryService.GetCategoriesByDepartmentIdAsync(departmentId);
+        var categoryIds = categories.Select(c => c.Id).ToList();
+        mnemonics = await CategoryMnemonicService.GetMnemonicsByCategoryIdsAsync(categoryIds);
+    }
+
+    private void EditMnemonic(int mnemonicId)
+    {
+        Navigation.NavigateTo($"/edit-mnemonic/{mnemonicId}");
+    }
+}
+
+

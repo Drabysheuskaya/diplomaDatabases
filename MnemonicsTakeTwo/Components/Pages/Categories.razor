@@ -1,0 +1,37 @@
+﻿@rendermode InteractiveServer
+@page "/categories/{departmentId:int}"
+@using MnemonicsTakeTwo.Data
+@using MnemonicsTakeTwo.Services
+@inject NavigationManager Navigation
+@inject ICategoryService CategoryService
+@inject IJSRuntime JSRuntime
+
+<h3>Categories</h3>
+
+<MudButton OnClick="GoBack">Go Back</MudButton>
+
+<MudGrid>
+    @foreach (var category in categories)
+    {
+        <MudItem xs="12" sm="6" md="4" lg="3">
+            <MudButton Variant="Variant.Filled" Color="Color.Primary" Href="@($"/category_mnemonics/{category.Id}")" FullWidth="true">@category.Name</MudButton>
+        </MudItem>
+    }
+</MudGrid>
+
+@code {
+    [Parameter]
+    public int departmentId { get; set; }
+
+    private List<Category> categories = new();
+
+    protected override async Task OnInitializedAsync()
+    {
+        categories = (await CategoryService.GetCategoriesByDepartmentIdAsync(departmentId)).ToList();
+    }
+
+    private async Task GoBack()
+    {
+        await JSRuntime.InvokeVoidAsync("history.back");
+    }
+}

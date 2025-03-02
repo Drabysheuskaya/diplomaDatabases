@@ -1,0 +1,44 @@
+﻿@rendermode InteractiveAuto
+@page "/select-department-edit-mnemonic"
+@using MnemonicsTakeTwo.Data
+@using MnemonicsTakeTwo.Services
+@inject IDepartmentService DepartmentService
+@inject NavigationManager Navigation
+@using Microsoft.AspNetCore.Authorization
+@attribute [Authorize]
+
+<h3>Select Department</h3>
+
+<MudGrid>
+    @foreach (var department in departments)
+    {
+        <MudItem xs="12" sm="6" md="4" lg="3">
+            <MudCard>
+                <MudCardContent>
+                    <MudText Typo="Typo.h6">@department.Name</MudText>
+                </MudCardContent>
+                <MudCardActions>
+                    <MudButton Variant="Variant.Filled" Color="Color.Primary" OnClick="() => NavigateToEditMnemonicList(department.Id)">Select</MudButton>
+                </MudCardActions>
+            </MudCard>
+        </MudItem>
+    }
+</MudGrid>
+
+@code {
+    private List<Department> departments = new();
+
+    protected override async Task OnInitializedAsync()
+    {
+        departments = (await DepartmentService.GetDepartmentsAsync()).ToList();
+    }
+
+    private void NavigateToEditMnemonicList(int departmentId)
+    {
+        Navigation.NavigateTo($"/mnemonics-edit/{departmentId}");
+    }
+}
+
+
+
+

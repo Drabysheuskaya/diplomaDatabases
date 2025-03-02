@@ -1,0 +1,100 @@
+﻿@rendermode InteractiveAuto
+@page "/add-mnemonic/{departmentId:int}"
+@using MnemonicsTakeTwo.Data
+@using MnemonicsTakeTwo.Services
+@inject ICategoryService CategoryService
+@inject IMnemonicService MnemonicService
+@inject NavigationManager Navigation
+@using Microsoft.AspNetCore.Authorization
+@attribute [Authorize]
+
+<h3>Add Mnemonic</h3>
+
+<EditForm Model="mnemonic" OnValidSubmit="HandleValidSubmit">
+    <DataAnnotationsValidator />
+    <ValidationSummary />
+
+    <MudGrid>
+        <MudItem xs="12" sm="6">
+            <MudTextField @bind-Value="mnemonic.Name" Label="Name" Required="true" ShrinkLabel="true" />
+        </MudItem>
+        <MudItem xs="12" sm="6">
+            <MudTextField @bind-Value="mnemonic.Phrase" Label="Phrase" Required="true" ShrinkLabel="true" />
+        </MudItem>
+        <MudItem xs="12">
+            <MudTextField @bind-Value="mnemonic.Description" Label="Description" Required="true" ShrinkLabel="true" />
+        </MudItem>
+        <MudItem xs="12" sm="6">
+            <MudSelect T="int" Label="Category" @bind-Value="selectedCategoryId" Required="true">
+                @foreach (var category in categories)
+                {
+                    <MudSelectItem T="int" Value="@category.Id">@category.Name</MudSelectItem>
+                }
+            </MudSelect>
+        </MudItem>
+        <MudItem xs="12">
+            <InputFile OnChange="SelectImage" />
+            @if (imageData == null)
+            {
+                <MudText Color="Color.Error">Please upload an image.</MudText>
+            }
+        </MudItem>
+        <MudItem xs="12">
+            <MudCheckBox T="bool" @bind-Checked="mnemonic.IsVisible" Label="Is Visible" />
+        </MudItem>
+        <MudItem xs="12">
+            <MudButton Variant="Variant.Filled" Color="Color.Secondary" OnClick="LoadImage" Disabled="@(selectedFile == null)">Load Image</MudButton>
+        </MudItem>
+        <MudItem xs="12">
+            <MudButton Type="submit" Variant="Variant.Filled" Color="Color.Primary" Disabled="@(imageData == null)" OnClick="HandleValidSubmit">Add Mnemonic</MudButton>
+        </MudItem>
+    </MudGrid>
+</EditForm>
+
+@code {
+    [Parameter]
+    public int departmentId { get; set; }
+    private Mnemonic mnemonic = new Mnemonic();
+    private List<Category> categories = new();
+    private int selectedCategoryId;
+    private byte[] imageData;
+    private IBrowserFile selectedFile;
+
+    protected override async Task OnInitializedAsync()
+    {
+        categories = (await CategoryService.GetCategoriesByDepartmentIdAsync(departmentId)).ToList();
+    }
+
+    private void SelectImage(InputFileChangeEventArgs e)
+    {
+        selectedFile = e.File;
+    }
+
+    private async Task LoadImage()
+    {
+        if (selectedFile != null)
+        {
+            using var stream = selectedFile.OpenReadStream();
+            using var memoryStream = new MemoryStream();
+            await stream.CopyToAsync(memoryStream);
+            imageData = memoryStream.ToArray();
+        }
+    }
+
+    private async Task HandleValidSubmit()
+    {
+        if (imageData == null)
+        {
+            // Ensure image is loaded before submitting
+            imageData = null; // Placeholder for image data
+        }
+
+        mnemonic.Image = imageData;
+        mnemonic.IsApproved = true; // Set IsApproved to true
+        int mnemonicId = await MnemonicService.AddMnemonicAsync(mnemonic);
+        await MnemonicService.AddCategoryMnemonicAsync(new CategoryMnemonic { MnemonicId = mnemonicId, CategoryId = selectedCategoryId });
+        Navigation.NavigateTo("/departments");
+    }
+}
+
+

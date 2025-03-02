@@ -1,0 +1,47 @@
+﻿@using MnemonicsTakeTwo.Data
+@using MnemonicsTakeTwo.Services
+@inject IDepartmentService DepartmentService
+@inject IDialogService DialogService
+@inject NavigationManager Navigation
+@using Microsoft.AspNetCore.Authorization
+@attribute [Authorize]
+
+<MudDialog>
+    <DialogContent>
+        <MudText Typo="Typo.h6">Select Department</MudText>
+        <MudSelect T="int" Label="Department" @bind-Value="selectedDepartmentId" Required="true">
+            @foreach (var department in departments)
+            {
+                <MudSelectItem T="int" Value="@department.Id">@department.Name</MudSelectItem>
+            }
+        </MudSelect>
+        <MudButton Variant="Variant.Filled" Color="Color.Primary" OnClick="ShowSelectMnemonicsDialog">Next</MudButton>
+    </DialogContent>
+</MudDialog>
+
+@code {
+    [CascadingParameter] MudDialogInstance MudDialog { get; set; }
+    [Parameter] public int GroupId { get; set; }
+    private List<Department> departments = new List<Department>();
+    private int selectedDepartmentId;
+
+    protected override async Task OnInitializedAsync()
+    {
+        departments = (await DepartmentService.GetDepartmentsAsync()).ToList() ?? new List<Department>();
+    }
+
+    private void ShowSelectMnemonicsDialog()
+    {
+        var parameters = new DialogParameters { ["DepartmentId"] = selectedDepartmentId, ["GroupId"] = GroupId };
+        var options = new DialogOptions { CloseButton = true, MaxWidth = MaxWidth.Small, FullWidth = true };
+        var dialog = DialogService.Show<SelectMnemonicsDialog>("Select Mnemonics", parameters, options);
+        MudDialog.Close(DialogResult.Ok(true));
+    }
+}
+
+
+
+
+
+
+

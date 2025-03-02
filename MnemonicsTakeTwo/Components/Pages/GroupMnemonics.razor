@@ -1,0 +1,45 @@
+﻿@rendermode InteractiveServer
+@page "/group/{groupId:int}/mnemonics"
+@using MnemonicsTakeTwo.Data
+@using MnemonicsTakeTwo.Services
+@inject IGroupMnemonicService GroupMnemonicService
+@inject NavigationManager Navigation
+@inject IJSRuntime JSRuntime
+
+<h3>Mnemonics for Group</h3>
+
+<MudButton OnClick="GoBack">Go Back</MudButton>
+
+<MudGrid>
+    @foreach (var mnemonic in mnemonics)
+    {
+        <MudItem xs="12" sm="6" md="4" lg="3">
+            <MudCard>
+                <MudCardContent>
+                    <MudText Typo="Typo.h6">@mnemonic.Name</MudText>
+                    <MudText Typo="Typo.body2">@mnemonic.Description</MudText>
+                </MudCardContent>
+                <MudCardActions>
+                    <MudButton Variant="Variant.Filled" Color="Color.Primary" Href="@($"/mnemonic/{mnemonic.Id}")">View</MudButton>
+                </MudCardActions>
+            </MudCard>
+        </MudItem>
+    }
+    </MudGrid>
+
+    @code {
+    [Parameter]
+    public int groupId { get; set; }
+
+    private List<Mnemonic> mnemonics = new();
+
+    protected override async Task OnInitializedAsync()
+    {
+        mnemonics = (await GroupMnemonicService.GetMnemonicsByGroupIdAsync(groupId)).ToList();
+    }
+
+    private async Task GoBack()
+    {
+        await JSRuntime.InvokeVoidAsync("history.back");
+    }
+}

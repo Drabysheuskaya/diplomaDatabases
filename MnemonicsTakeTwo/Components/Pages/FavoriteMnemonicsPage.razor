@@ -1,0 +1,61 @@
+﻿@rendermode InteractiveServer
+@page "/favorite-mnemonics"
+@using MnemonicsTakeTwo.Data
+@using MnemonicsTakeTwo.Services
+@inject IFavoriteMnemonicService FavoriteMnemonicService
+@inject IUserIdentityProcessor UserIdentityProcessor
+@inject NavigationManager Navigation
+
+<h3>Favorite Mnemonics</h3>
+
+@if (favoriteMnemonics == null)
+{
+    <p>Loading...</p>
+}
+else if (!favoriteMnemonics.Any())
+{
+    <p>No favorite mnemonics found.</p>
+}
+else
+{
+    <MudTable Items="favoriteMnemonics" Hover="true">
+        <HeaderContent>
+            <MudTh>Name</MudTh>
+            <MudTh>Phrase</MudTh>
+            <MudTh>Description</MudTh>
+            <MudTh>Actions</MudTh>
+        </HeaderContent>
+        <RowTemplate>
+            <MudTd DataLabel="Name">@context.Mnemonic.Name</MudTd>
+            <MudTd DataLabel="Phrase">@context.Mnemonic.Phrase</MudTd>
+            <MudTd DataLabel="Description">@context.Mnemonic.Description</MudTd>
+            <MudTd>
+                <MudButton Variant="Variant.Filled" Color="Color.Primary" OnClick="() => NavigateToMnemonic(context.Mnemonic.Id)">View</MudButton>
+                <MudButton Variant="Variant.Filled" Color="Color.Error" OnClick="() => RemoveFromFavorites(context.Mnemonic.Id)">Remove</MudButton>
+            </MudTd>
+        </RowTemplate>
+    </MudTable>
+}
+
+@code {
+    private List<FavoriteMnemonic> favoriteMnemonics;
+    private string currentUserId;
+
+    protected override async Task OnInitializedAsync()
+    {
+        currentUserId = this.UserIdentityProcessor.GetCurrentUserId().Result;
+
+        favoriteMnemonics = await FavoriteMnemonicService.GetFavoriteMnemonicsByUserIdAsync(currentUserId);
+    }
+
+    private async Task RemoveFromFavorites(int mnemonicId)
+    {
+        await FavoriteMnemonicService.RemoveFavoriteMnemonicAsync(currentUserId, mnemonicId);
+        favoriteMnemonics = await FavoriteMnemonicService.GetFavoriteMnemonicsByUserIdAsync(currentUserId);
+    }
+
+    private void NavigateToMnemonic(int mnemonicId)
+    {
+        Navigation.NavigateTo($"/mnemonic/{mnemonicId}");
+    }
+}

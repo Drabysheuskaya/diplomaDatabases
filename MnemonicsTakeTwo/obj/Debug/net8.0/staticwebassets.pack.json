@@ -1,0 +1,45 @@
+{
+  "Files": [
+    {
+      "Id": "C:\\Users\\dkdd8\\source\\repos\\MnemonicsTakeTwo\\MnemonicsTakeTwo\\MnemonicsTakeTwo\\obj\\Debug\\net8.0\\scopedcss\\projectbundle\\MnemonicsTakeTwo.bundle.scp.css",
+      "PackagePath": "staticwebassets\\MnemonicsTakeTwo.qz19cfhmjo.bundle.scp.css"
+    },
+    {
+      "Id": "C:\\Users\\dkdd8\\source\\repos\\MnemonicsTakeTwo\\MnemonicsTakeTwo\\MnemonicsTakeTwo\\wwwroot\\app.css",
+      "PackagePath": "staticwebassets\\app.css"
+    },
+    {
+      "Id": "C:\\Users\\dkdd8\\source\\repos\\MnemonicsTakeTwo\\MnemonicsTakeTwo\\MnemonicsTakeTwo\\wwwroot\\bootstrap\\bootstrap.min.css",
+      "PackagePath": "staticwebassets\\bootstrap\\bootstrap.min.css"
+    },
+    {
+      "Id": "C:\\Users\\dkdd8\\source\\repos\\MnemonicsTakeTwo\\MnemonicsTakeTwo\\MnemonicsTakeTwo\\wwwroot\\bootstrap\\bootstrap.min.css.map",
+      "PackagePath": "staticwebassets\\bootstrap\\bootstrap.min.css.map"
+    },
+    {
+      "Id": "C:\\Users\\dkdd8\\source\\repos\\MnemonicsTakeTwo\\MnemonicsTakeTwo\\MnemonicsTakeTwo\\wwwroot\\favicon.png",
+      "PackagePath": "staticwebassets\\favicon.png"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.MnemonicsTakeTwo.Microsoft.AspNetCore.StaticWebAssetEndpoints.props",
+      "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssetEndpoints.props"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.MnemonicsTakeTwo.Microsoft.AspNetCore.StaticWebAssets.props",
+      "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssets.props"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.build.MnemonicsTakeTwo.props",
+      "PackagePath": "build\\MnemonicsTakeTwo.props"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.buildMultiTargeting.MnemonicsTakeTwo.props",
+      "PackagePath": "buildMultiTargeting\\MnemonicsTakeTwo.props"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.buildTransitive.MnemonicsTakeTwo.props",
+      "PackagePath": "buildTransitive\\MnemonicsTakeTwo.props"
+    }
+  ],
+  "ElementsToRemove": []
+}

@@ -1,0 +1,135 @@
+﻿@rendermode InteractiveAuto
+@page "/edit-requested-mnemonic/{mnemonicId:int}"
+@using MnemonicsTakeTwo.Data
+@using MnemonicsTakeTwo.Services
+@inject ICategoryService CategoryService
+@inject ICategoryMnemonicService CategoryMnemonicService
+@inject IMnemonicService MnemonicService
+@inject NavigationManager Navigation
+@using Microsoft.AspNetCore.Authorization
+@attribute [Authorize]
+
+<h3>Edit Requested Mnemonic</h3>
+
+@if (mnemonic == null || categories == null)
+{
+    <p>Loading...</p>
+}
+else
+{
+    <EditForm Model="mnemonic">
+        <DataAnnotationsValidator />
+        <ValidationSummary />
+
+        <MudGrid>
+            <MudItem xs="12" sm="6">
+                <MudTextField @bind-Value="mnemonic.Name" Label="Name" Required="true" ShrinkLabel="true" />
+            </MudItem>
+            <MudItem xs="12" sm="6">
+                <MudTextField @bind-Value="mnemonic.Phrase" Label="Phrase" Required="true" ShrinkLabel="true" />
+            </MudItem>
+            <MudItem xs="12">
+                <MudTextField @bind-Value="mnemonic.Description" Label="Description" Required="true" ShrinkLabel="true" />
+            </MudItem>
+            <MudItem xs="12" sm="6">
+                <MudSelect T="int" Label="Category" @bind-Value="selectedCategoryId" Required="true">
+                    @foreach (var category in categories)
+                    {
+                        <MudSelectItem T="int" Value="@category.Id">@category.Name</MudSelectItem>
+                    }
+                </MudSelect>
+            </MudItem>
+            <MudItem xs="12">
+                <MudCheckBox T="bool" @bind-Value="mnemonic.IsVisible" Label="Is Visible" />
+            </MudItem>
+            <MudItem xs="12">
+                <InputFile OnChange="SelectImage" />
+                @if (imageData == null && mnemonic.Image == null)
+                {
+                    <MudText Color="Color.Error">Please upload an image.</MudText>
+                }
+                else if (mnemonic.Image != null)
+                {
+                    <img src="data:image/png;base64,@Convert.ToBase64String(mnemonic.Image)" alt="Mnemonic Image" style="max-width: 100%; height: auto;" />
+                }
+            </MudItem>
+            <MudItem xs="12">
+                <MudButton Variant="Variant.Filled" Color="Color.Secondary" OnClick="LoadImage" Disabled="@(selectedFile == null)">Load Image</MudButton>
+            </MudItem>
+            <MudItem xs="12">
+                <MudButton Variant="Variant.Filled" Color="Color.Success" OnClick="ApproveMnemonic">Approve</MudButton>
+                <MudButton Variant="Variant.Filled" Color="Color.Error" OnClick="RejectMnemonic">Reject</MudButton>
+            </MudItem>
+        </MudGrid>
+    </EditForm>
+}
+
+@code {
+    [Parameter]
+    public int mnemonicId { get; set; }
+    private Mnemonic mnemonic;
+    private List<Category> categories;
+    private int selectedCategoryId;
+    private byte[] imageData;
+    private IBrowserFile selectedFile;
+
+    protected override async Task OnInitializedAsync()
+    {
+        mnemonic = await MnemonicService.GetMnemonicByIdAsync(mnemonicId);
+        if (mnemonic != null)
+        {
+            var requestedMnemonic = await MnemonicService.GetRequestedMnemonicByIdAsync(mnemonicId);
+            if (requestedMnemonic != null)
+            {
+                categories = (await CategoryService.GetCategoriesByDepartmentIdAsync(requestedMnemonic.DepartmentId)).ToList();
+                selectedCategoryId = mnemonic.CategoryMnemonics?.FirstOrDefault()?.CategoryId ?? 0;
+            }
+        }
+    }
+
+    private void SelectImage(InputFileChangeEventArgs e)
+    {
+        selectedFile = e.File;
+    }
+
+    private async Task LoadImage()
+    {
+        if (selectedFile != null)
+        {
+            using var stream = selectedFile.OpenReadStream();
+            using var memoryStream = new MemoryStream();
+            await stream.CopyToAsync(memoryStream);
+            imageData = memoryStream.ToArray();
+        }
+    }
+
+
+    private async Task ApproveMnemonic()
+    {
+        if (imageData != null)
+        {
+            mnemonic.Image = imageData;
+        }
+
+        Mnemonic newMnemonic = await MnemonicService.UpdateMnemonicAsync(mnemonic);
+
+        var categoryMnemonic = new CategoryMnemonic
+            {
+                CategoryId = selectedCategoryId,
+                MnemonicId = newMnemonic.Id
+            };
+        await CategoryMnemonicService.AddCategoryMnemonicAsync(categoryMnemonic);
+
+        mnemonic.IsApproved = true;
+        await MnemonicService.UpdateMnemonicAsync(mnemonic);
+        await MnemonicService.ApproveMnemonicAsync(mnemonicId);
+        Navigation.NavigateTo("/approve-requested-mnemonics");
+    }
+
+    private async Task RejectMnemonic()
+    {
+        await MnemonicService.RejectMnemonicAsync(mnemonicId);
+        Navigation.NavigateTo("/approve-requested-mnemonics");
+    }
+}
+

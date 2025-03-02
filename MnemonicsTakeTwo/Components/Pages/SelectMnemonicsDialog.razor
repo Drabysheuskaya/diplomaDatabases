@@ -1,0 +1,60 @@
+﻿@using MnemonicsTakeTwo.Data
+@using MnemonicsTakeTwo.Services
+@inject ICategoryMnemonicService CategoryMnemonicService
+@inject ICategoryService CategoryService
+@inject IGroupMnemonicService GroupMnemonicService
+@inject IDialogService DialogService
+@inject NavigationManager Navigation
+@using Microsoft.AspNetCore.Authorization
+@attribute [Authorize]
+
+<MudDialog>
+    <DialogContent>
+        <MudText Typo="Typo.h6">Select Mnemonics</MudText>
+        <MudTable Items="mnemonics" Hover="true" MultiSelection="true" @bind-SelectedItems="selectedMnemonics">
+            <HeaderContent>
+                <MudTh>Name</MudTh>
+                <MudTh>Phrase</MudTh>
+            </HeaderContent>
+            <RowTemplate>
+                <MudTd DataLabel="Name">@context.Name</MudTd>
+                <MudTd DataLabel="Phrase">@context.Phrase</MudTd>
+            </RowTemplate>
+        </MudTable>
+        <MudButton Variant="Variant.Filled" Color="Color.Primary" OnClick="SaveSelectedMnemonics">Save</MudButton>
+    </DialogContent>
+</MudDialog>
+
+@code {
+    [CascadingParameter] MudDialogInstance MudDialog { get; set; }
+    [Parameter] public int DepartmentId { get; set; }
+    [Parameter] public int GroupId { get; set; }
+    private HashSet<Mnemonic> mnemonics;
+    private HashSet<Mnemonic> selectedMnemonics = new HashSet<Mnemonic>();
+
+    protected override async Task OnInitializedAsync()
+    {
+        var categories = await CategoryService.GetCategoriesByDepartmentIdAsync(DepartmentId);
+        var categoryIds = categories.Select(c => c.Id).ToList();
+        var allMnemonics = await CategoryMnemonicService.GetMnemonicsByCategoryIdsAsync(categoryIds);
+
+        var groupMnemonics = await GroupMnemonicService.GetMnemonicsByGroupIdAsync(GroupId);
+        var groupMnemonicIds = new HashSet<int>(groupMnemonics.Select(m => m.Id));
+
+        mnemonics = new HashSet<Mnemonic>(allMnemonics.Where(m => !groupMnemonicIds.Contains(m.Id)));
+    }
+
+    private async Task SaveSelectedMnemonics()
+    {
+        foreach (var mnemonic in selectedMnemonics)
+        {
+            await GroupMnemonicService.AddGroupMnemonicAsync(new GroupMnemonic
+                {
+                    GroupId = GroupId,
+                    MnemonicId = mnemonic.Id
+                });
+        }
+        MudDialog.Close(DialogResult.Ok(true));
+    }
+}
+

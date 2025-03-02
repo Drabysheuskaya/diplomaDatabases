@@ -1,0 +1,54 @@
+﻿@rendermode InteractiveAuto
+@page "/approve-requested-mnemonics"
+@using MnemonicsTakeTwo.Data
+@using MnemonicsTakeTwo.Services
+@inject IMnemonicService MnemonicService
+@inject NavigationManager Navigation
+@using Microsoft.AspNetCore.Authorization
+@attribute [Authorize]
+
+<h3>Approve Requested Mnemonics</h3>
+
+@if (requestedMnemonics == null)
+{
+    <p>Loading...</p>
+}
+else if (!requestedMnemonics.Any())
+{
+    <p>No mnemonics to approve.</p>
+}
+else
+{
+    <MudTable Items="requestedMnemonics" Hover="true">
+        <HeaderContent>
+            <MudTh>Name</MudTh>
+            <MudTh>Phrase</MudTh>
+            <MudTh>Description</MudTh>
+            <MudTh>Actions</MudTh>
+        </HeaderContent>
+        <RowTemplate>
+            <MudTd DataLabel="Name">@context.Mnemonic.Name</MudTd>
+            <MudTd DataLabel="Phrase">@context.Mnemonic.Phrase</MudTd>
+            <MudTd DataLabel="Description">@context.Mnemonic.Description</MudTd>
+            <MudTd>
+                <MudButton Variant="Variant.Filled" Color="Color.Primary" OnClick="() => OpenMnemonic(context.Mnemonic.Id)">Open</MudButton>
+            </MudTd>
+        </RowTemplate>
+    </MudTable>
+}
+
+@code {
+    private List<RequestedMnemonic> requestedMnemonics;
+
+    protected override async Task OnInitializedAsync()
+    {
+        requestedMnemonics = await MnemonicService.GetRequestedMnemonicsAsync();
+    }
+
+    private void OpenMnemonic(int mnemonicId)
+    {
+        Navigation.NavigateTo($"/edit-requested-mnemonic/{mnemonicId}");
+    }
+}
+
+

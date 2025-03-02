@@ -1,0 +1,41 @@
+﻿@using MnemonicsTakeTwo.Data
+@using MnemonicsTakeTwo.Services
+@inject IDepartmentService DepartmentService
+@inject NavigationManager Navigation
+@using Microsoft.AspNetCore.Authorization
+@attribute [Authorize]
+
+<MudDialog>
+    <DialogContent>
+        <MudText Typo="Typo.h6">Add Department</MudText>
+        <EditForm Model="department" OnValidSubmit="HandleValidSubmit">
+            <DataAnnotationsValidator />
+            <ValidationSummary />
+
+            <MudGrid>
+                <MudItem xs="12" sm="6">
+                    <MudTextField @bind-Value="department.Name" Label="Name" Required="true" ShrinkLabel="true" />
+                </MudItem>
+                <MudItem xs="12">
+                    <MudButton Type="submit" Variant="Variant.Filled" Color="Color.Primary" OnClick="HandleValidSubmit">Save</MudButton>
+                </MudItem>
+            </MudGrid>
+        </EditForm>
+    </DialogContent>
+</MudDialog>
+
+@code {
+    [CascadingParameter] MudDialogInstance MudDialog { get; set; }
+
+    private Department department = new Department();
+
+    private async Task HandleValidSubmit()
+    {
+        await DepartmentService.AddDepartmentAsync(department);
+        MudDialog.Close(DialogResult.Ok(true));
+    }
+}
+
+
+
+

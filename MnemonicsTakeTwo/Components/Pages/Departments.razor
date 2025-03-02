@@ -1,0 +1,28 @@
+﻿@page "/departments"
+@using MnemonicsTakeTwo.Data
+@using MnemonicsTakeTwo.Services
+@inject NavigationManager Navigation
+@inject IDepartmentService DepartmentService
+
+<h3>Departments</h3>
+
+<MudGrid>
+    @foreach (var department in departments)
+    {
+        <MudItem xs="12" sm="6" md="4" lg="3">
+            <MudButton Variant="Variant.Filled" Color="Color.Primary" Href="@($"/categories/{department.Id}")" FullWidth="true">@department.Name</MudButton>
+        </MudItem>
+    }
+</MudGrid>
+
+
+
+@code {
+    private List<Department> departments = new();
+
+    protected override async Task OnInitializedAsync()
+    {
+        departments = (await DepartmentService.GetDepartmentsAsync()).ToList();
+    }
+}
+

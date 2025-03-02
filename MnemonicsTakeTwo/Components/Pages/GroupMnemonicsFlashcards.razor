@@ -1,0 +1,130 @@
+﻿@rendermode InteractiveAuto
+@page "/group-mnemonics/{groupId:int}"
+@using MnemonicsTakeTwo.Data
+@using MnemonicsTakeTwo.Services
+@inject NavigationManager Navigation
+@inject IGroupMnemonicService GroupMnemonicService
+@inject IFlashcardResultService FlashcardResultService
+@inject IUserIdentityProcessor UserIdentityProcessor
+@using Microsoft.AspNetCore.Authorization
+@attribute [Authorize]
+
+<h3>Group Mnemonics Flashcards</h3>
+
+@if (mnemonics == null)
+{
+    <p>Loading...</p>
+}
+else if (mnemonics.Count == 0)
+{
+    <p>No mnemonics found for this group.</p>
+}
+else
+{
+    <MudCard>
+        <MudCardContent>
+            <MudText Typo="Typo.h4">@mnemonics[currentIndex].Name</MudText>
+            @if (showDescription)
+            {
+                <MudText Typo="Typo.body1">@mnemonics[currentIndex].Phrase</MudText>
+
+                <MudText Typo="Typo.body2">@mnemonics[currentIndex].Description</MudText>
+            }
+            @if (mnemonics[currentIndex].Image != null)
+            {
+                <img src="data:image/png;base64,@Convert.ToBase64String(mnemonics[currentIndex].Image)" alt="Mnemonic Image" style="max-width: 100%; height: auto;" />
+            }
+        </MudCardContent>
+        <MudCardActions>
+            <MudButton Variant="Variant.Outlined" Color="Color.Primary" OnClick="ShowPrevious" Disabled="@isFirst">Previous</MudButton>
+            <MudButton Variant="Variant.Outlined" Color="Color.Primary" OnClick="ShowNext" Disabled="@isLast">Next</MudButton>
+            <MudButton Variant="Variant.Filled" Color="Color.Secondary" OnClick="ToggleDescription">@DescriptionButtonText</MudButton>
+            <MudButton Variant="Variant.Filled" Color="Color.Success" OnClick="() => RecordResult(true)" Disabled="@resultRecorded">I knew that</MudButton>
+            <MudButton Variant="Variant.Filled" Color="Color.Error" OnClick="() => RecordResult(false)" Disabled="@resultRecorded">I didn't know that</MudButton>
+        </MudCardActions>
+    </MudCard>
+    <MudButton Variant="Variant.Filled" Color="Color.Primary" OnClick="Finish">Finish</MudButton>
+}
+
+@code {
+    [Parameter]
+    public int groupId { get; set; }
+    private List<Mnemonic> mnemonics;
+    private int currentIndex = 0;
+    private bool showDescription = false;
+    private string currentUserId;
+    private List<FlashcardResult> results = new();
+    private bool resultRecorded = false;
+    private string sessionId;
+
+    protected override async Task OnInitializedAsync()
+    {
+        currentUserId = this.UserIdentityProcessor.GetCurrentUserId().Result;
+        sessionId = Guid.NewGuid().ToString(); // Create a new session ID
+
+        mnemonics = (await GroupMnemonicService.GetMnemonicsByGroupIdAsync(groupId)).ToList();
+    }
+
+    private bool isFirst => currentIndex == 0;
+    private bool isLast => currentIndex == mnemonics.Count - 1;
+
+    private void ShowPrevious()
+    {
+        if (currentIndex > 0)
+        {
+            currentIndex--;
+            showDescription = false;
+            resultRecorded = results.Any(r => r.MnemonicId == mnemonics[currentIndex].Id);
+        }
+    }
+
+    private void ShowNext()
+    {
+        if (currentIndex < mnemonics.Count - 1)
+        {
+            currentIndex++;
+            showDescription = false;
+            resultRecorded = results.Any(r => r.MnemonicId == mnemonics[currentIndex].Id);
+        }
+    }
+
+    private void ToggleDescription()
+    {
+        showDescription = !showDescription;
+    }
+
+    private string DescriptionButtonText => showDescription ? "Hide Description" : "Show Description";
+
+    private async Task RecordResult(bool knewIt)
+    {
+        var result = new FlashcardResult
+            {
+                GroupId = groupId,
+                MnemonicId = mnemonics[currentIndex].Id,
+                UserId = currentUserId,
+                SessionId = sessionId, 
+                KnewIt = knewIt
+            };
+        results.Add(result);
+        resultRecorded = true;
+
+        if (isLast)
+        {
+            await Finish();
+        }
+        else
+        {
+            ShowNext();
+        }
+    }
+
+    private async Task Finish()
+    {
+        foreach (var result in results)
+        {
+            await FlashcardResultService.AddFlashcardResultAsync(result);
+        }
+        Navigation.NavigateTo($"/group-mnemonics-results/{groupId}/{sessionId}");
+    }
+}
+

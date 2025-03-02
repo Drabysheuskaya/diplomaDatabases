@@ -1,0 +1,59 @@
+﻿@using MnemonicsTakeTwo.Data
+@using MnemonicsTakeTwo.Services
+@inject IGroupService GroupService
+@inject NavigationManager Navigation
+@using Microsoft.AspNetCore.Authorization
+@attribute [Authorize]
+
+<MudDialog>
+    <DialogContent>
+        <MudText Typo="Typo.h6">Add Group</MudText>
+        <EditForm Model="group" OnValidSubmit="HandleValidSubmit">
+            <DataAnnotationsValidator />
+            <ValidationSummary />
+
+            <MudGrid>
+                <MudItem xs="12" sm="6">
+                    <MudTextField @bind-Value="group.Name" Label="Name" Required="true" ShrinkLabel="true" />
+                </MudItem>
+                <MudItem xs="12" sm="6">
+                    <MudTextField @bind-Value="group.Description" Label="Description" ShrinkLabel="true" />
+                </MudItem>
+                <MudItem xs="12" sm="6">
+                    <MudTextField @bind-Value="group.Code" Label="Code" ShrinkLabel="true" />
+                </MudItem>
+                <MudItem xs="12" sm="6">
+                    <MudButton Variant="Variant.Filled" Color="Color.Secondary" OnClick="GenerateRandomCode">Generate Code</MudButton>
+                </MudItem>
+                <MudItem xs="12">
+                    <MudButton Type="submit" Variant="Variant.Filled" Color="Color.Primary" OnClick="HandleValidSubmit">Save</MudButton>
+                </MudItem>
+            </MudGrid>
+        </EditForm>
+    </DialogContent>
+</MudDialog>
+
+@code {
+    [CascadingParameter] MudDialogInstance MudDialog { get; set; }
+    private Group group = new Group();
+
+    private async Task HandleValidSubmit()
+    {
+        await GroupService.AddGroupAsync(group);
+        MudDialog.Close(DialogResult.Ok(true));
+    }
+
+    private void GenerateRandomCode()
+    {
+        const string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+        var random = new Random();
+        group.Code = new string(Enumerable.Repeat(chars, 8)
+            .Select(s => s[random.Next(s.Length)]).ToArray());
+    }
+}
+
+
+
+
+
+

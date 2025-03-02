@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="..\buildMultiTargeting\MnemonicsTakeTwo.Client.props" />
+</Project>

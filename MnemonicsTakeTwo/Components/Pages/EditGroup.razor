@@ -1,0 +1,111 @@
+﻿@rendermode InteractiveServer
+@page "/edit-group/{groupId:int}"
+@using MnemonicsTakeTwo.Data
+@using MnemonicsTakeTwo.Services
+@inject IGroupService GroupService
+@inject IGroupMnemonicService GroupMnemonicService
+@inject NavigationManager Navigation
+@inject IDialogService DialogService
+@using Microsoft.AspNetCore.Authorization
+@attribute [Authorize]
+
+<h3>Edit Group</h3>
+
+@if (group == null)
+{
+    <p>Loading...</p>
+}
+else
+{
+    <EditForm Model="group" OnValidSubmit="HandleValidSubmit">
+        <DataAnnotationsValidator />
+        <ValidationSummary />
+
+        <MudGrid>
+            <MudItem xs="12" sm="6">
+                <MudTextField @bind-Value="group.Name" Label="Name" Required="true" ShrinkLabel="true" />
+            </MudItem>
+            <MudItem xs="12" sm="6">
+                <MudTextField @bind-Value="group.Description" Label="Description" ShrinkLabel="true" />
+            </MudItem>
+            <MudItem xs="12" sm="6">
+                <MudTextField @bind-Value="group.Code" Label="Code" ShrinkLabel="true" />
+            </MudItem>
+            <MudItem xs="12" sm="6">
+                <MudButton Variant="Variant.Filled" Color="Color.Secondary" OnClick="GenerateRandomCode">Generate Code</MudButton>
+            </MudItem>
+            <MudItem xs="12">
+                <MudButton Type="submit" Variant="Variant.Filled" Color="Color.Primary" OnClick="HandleValidSubmit">Save Changes</MudButton>
+            </MudItem>
+            <MudItem xs="12">
+                <MudButton Variant="Variant.Filled" Color="Color.Primary" OnClick="ShowSelectDepartmentDialog">Add Mnemonics</MudButton>
+            </MudItem>
+            <MudItem xs="12">
+                <MudButton Variant="Variant.Filled" Color="Color.Error" OnClick="ShowRemoveMnemonicsDialog">Remove Mnemonics</MudButton>
+            </MudItem>
+        </MudGrid>
+    </EditForm>
+}
+
+@code {
+    [Parameter]
+    public int groupId { get; set; }
+    private Group group;
+
+    protected override async Task OnInitializedAsync()
+    {
+        group = await GroupService.GetGroupByIdAsync(groupId);
+    }
+
+    private async Task HandleValidSubmit()
+    {
+        await GroupService.UpdateGroupAsync(group);
+        Navigation.NavigateTo("/manage-groups");
+    }
+
+    private void GenerateRandomCode()
+    {
+        const string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+        var random = new Random();
+        group.Code = new string(Enumerable.Repeat(chars, 8)
+            .Select(s => s[random.Next(s.Length)]).ToArray());
+    }
+
+    private async Task ShowSelectDepartmentDialog()
+    {
+        var parameters = new DialogParameters { ["GroupId"] = groupId };
+        var options = new DialogOptions { CloseButton = true, MaxWidth = MaxWidth.Small, FullWidth = true };
+        var dialog = DialogService.Show<SelectDepartmentDialog>("Select Department", parameters, options);
+        var result = await dialog.Result;
+
+        if (!result.Canceled)
+        {
+            var selectedMnemonics = result.Data as List<int>;
+            if (selectedMnemonics != null)
+            {
+                await AddMnemonicsToGroup(selectedMnemonics);
+            }
+        }
+    }
+
+    private async Task ShowRemoveMnemonicsDialog()
+    {
+        var parameters = new DialogParameters { ["GroupId"] = groupId };
+        var options = new DialogOptions { CloseButton = true, MaxWidth = MaxWidth.Small, FullWidth = true };
+        var dialog = DialogService.Show<RemoveMnemonicsDialog>("Remove Mnemonics", parameters, options);
+
+    }
+
+    private async Task AddMnemonicsToGroup(List<int> mnemonicIds)
+    {
+        foreach (var mnemonicId in mnemonicIds)
+        {
+            await GroupMnemonicService.AddGroupMnemonicAsync(new GroupMnemonic
+                {
+                    GroupId = groupId,
+                    MnemonicId = mnemonicId
+                });
+        }
+    }
+
+}

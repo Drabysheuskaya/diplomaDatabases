@@ -1,0 +1,48 @@
+﻿@using MnemonicsTakeTwo.Data
+@using MnemonicsTakeTwo.Services
+@inject ICategoryService CategoryService
+@inject NavigationManager Navigation
+@using Microsoft.AspNetCore.Authorization
+@attribute [Authorize]
+
+<MudDialog>
+    <DialogContent>
+        <MudText Typo="Typo.h6">Add Category</MudText>
+        <EditForm Model="category" OnValidSubmit="HandleValidSubmit">
+            <DataAnnotationsValidator />
+            <ValidationSummary />
+
+            <MudGrid>
+                <MudItem xs="12" sm="6">
+                    <MudTextField @bind-Value="category.Name" Label="Name" Required="true" ShrinkLabel="true" />
+                </MudItem>
+                <MudItem xs="12">
+                    <MudButton Type="submit" Variant="Variant.Filled" Color="Color.Primary" OnClick="HandleValidSubmit">Save</MudButton>
+                </MudItem>
+            </MudGrid>
+        </EditForm>
+    </DialogContent>
+</MudDialog>
+
+@code {
+    [Parameter] public int DepartmentId { get; set; }
+
+    [CascadingParameter] MudDialogInstance MudDialog { get; set; }
+
+    private Category category = new Category();
+
+    protected override void OnInitialized()
+    {
+        category.DepartmentId = DepartmentId;
+    }
+
+    private async Task HandleValidSubmit()
+    {
+        await CategoryService.AddCategoryAsync(category);
+        MudDialog.Close(DialogResult.Ok(true));
+    }
+}
+
+
+
+

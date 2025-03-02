@@ -1,0 +1,41 @@
+﻿@rendermode InteractiveServer
+@page "/assign-roles"
+@using Microsoft.AspNetCore.Identity
+@using MnemonicsTakeTwo.Data
+@using MnemonicsTakeTwo.Services
+@inject UserManager<ApplicationUser> UserManager
+@inject NavigationManager Navigation
+
+@using Microsoft.AspNetCore.Authorization
+
+@attribute [Authorize]
+
+<h3>Assign Roles</h3>
+
+<MudTable Items="users" ServerData="LoadServerData" RowsPerPage="5">
+    <RowTemplate>
+        <MudTr>
+            <MudTd DataLabel="User Name">@context.UserName</MudTd>
+            <MudTd DataLabel="Email">@context.Email</MudTd>
+            <MudTd DataLabel="Actions">
+                <MudButton Variant="Variant.Filled" Color="Color.Primary" Href="@($"/user-roles/{context.Id}")">Manage Roles</MudButton>
+            </MudTd>
+        </MudTr>
+    </RowTemplate>
+</MudTable>
+
+@code {
+    private List<ApplicationUser> users = new();
+
+    protected override async Task OnInitializedAsync()
+    {
+        users = UserManager.Users.ToList();
+    }
+
+    private async Task<TableData<ApplicationUser>> LoadServerData(TableState state, CancellationToken cancellationToken)
+    {
+        var pagedUsers = users.Skip(state.Page * state.PageSize).Take(state.PageSize).ToList();
+        return new TableData<ApplicationUser> { Items = pagedUsers, TotalItems = users.Count };
+    }
+}
+

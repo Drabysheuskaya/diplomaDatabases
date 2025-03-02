@@ -1,0 +1,51 @@
+﻿@rendermode InteractiveServer
+@page "/edit-category/{categoryId:int}"
+@using MnemonicsTakeTwo.Data
+@using MnemonicsTakeTwo.Services
+@inject ICategoryService CategoryService
+@inject NavigationManager Navigation
+@using Microsoft.AspNetCore.Authorization
+@attribute [Authorize]
+
+<h3>Edit Category</h3>
+
+@if (category == null)
+{
+    <p>Loading...</p>
+}
+else
+{
+    <EditForm Model="category" OnValidSubmit="HandleValidSubmit">
+        <DataAnnotationsValidator />
+        <ValidationSummary />
+
+        <MudGrid>
+            <MudItem xs="12" sm="6">
+                <MudTextField @bind-Value="category.Name" Label="Name" Required="true" ShrinkLabel="true" />
+            </MudItem>
+            <MudItem xs="12">
+                <MudButton Type="submit" Variant="Variant.Filled" Color="Color.Primary" OnClick="HandleValidSubmit">Save Changes</MudButton>
+            </MudItem>
+        </MudGrid>
+    </EditForm>
+}
+
+@code {
+    [Parameter]
+    public int categoryId { get; set; }
+    private Category category;
+
+    protected override async Task OnInitializedAsync()
+    {
+        category = await CategoryService.GetCategoryByIdAsync(categoryId);
+    }
+
+    private async Task HandleValidSubmit()
+    {
+        await CategoryService.UpdateCategoryAsync(category);
+        Navigation.NavigateTo("/manage-departments");
+    }
+}
+
+
+

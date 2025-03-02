@@ -1,0 +1,46 @@
+﻿@page "/remove-mnemonics-dialog"
+@using MnemonicsTakeTwo.Data
+@using MnemonicsTakeTwo.Services
+@inject IGroupMnemonicService GroupMnemonicService
+@inject IDialogService DialogService
+@using Microsoft.AspNetCore.Authorization
+@attribute [Authorize]
+
+<MudDialog>
+    <DialogContent>
+        <MudText Typo="Typo.h6">Remove Mnemonics</MudText>
+        <MudTable Items="mnemonics" Hover="true" MultiSelection="true" @bind-SelectedItems="selectedMnemonics">
+            <HeaderContent>
+                <MudTh>Name</MudTh>
+                <MudTh>Phrase</MudTh>
+            </HeaderContent>
+            <RowTemplate>
+                <MudTd DataLabel="Name">@context.Name</MudTd>
+                <MudTd DataLabel="Phrase">@context.Phrase</MudTd>
+            </RowTemplate>
+        </MudTable>
+        <MudButton Variant="Variant.Filled" Color="Color.Primary" OnClick="RemoveSelectedMnemonics">Remove</MudButton>
+    </DialogContent>
+</MudDialog>
+
+@code {
+    [CascadingParameter] MudDialogInstance MudDialog { get; set; }
+    [Parameter] public int GroupId { get; set; }
+    private List<Mnemonic> mnemonics;
+    private HashSet<Mnemonic> selectedMnemonics = new HashSet<Mnemonic>();
+
+    protected override async Task OnInitializedAsync()
+    {
+        mnemonics = (await GroupMnemonicService.GetMnemonicsByGroupIdAsync(GroupId)).ToList();
+    }
+
+    private async Task RemoveSelectedMnemonics()
+    {
+        var selectedMnemonicIds = selectedMnemonics.Select(m => m.Id).ToList();
+        foreach (var mnemonicId in selectedMnemonicIds)
+        {
+            await GroupMnemonicService.RemoveGroupMnemonicAsync(GroupId, mnemonicId);
+        }
+        MudDialog.Close(DialogResult.Ok(true));
+    }
+}

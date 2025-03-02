@@ -1,0 +1,53 @@
+﻿@page "/join-group"
+@using MnemonicsTakeTwo.Data
+@using MnemonicsTakeTwo.Services
+@inject IGroupService GroupService
+@inject IGroupUserService GroupUserService
+@inject IUserIdentityProcessor UserIdentityProcessor
+@inject AuthenticationStateProvider AuthenticationStateProvider
+@inject IDialogService DialogService
+@inject NavigationManager Navigation
+@using Microsoft.AspNetCore.Authorization
+@attribute [Authorize]
+
+<MudDialog>
+    <DialogContent>
+        <MudText Typo="Typo.h6">Join Group</MudText>
+        <MudTextField @bind-Value="groupCode" Label="Group Code" Required="true" />
+        <MudButton Variant="Variant.Filled" Color="Color.Primary" OnClick="JoinGroup">Join</MudButton>
+    </DialogContent>
+</MudDialog>
+
+@code {
+    [CascadingParameter] MudDialogInstance MudDialog { get; set; }
+    private string groupCode;
+
+    private async Task JoinGroup()
+    {
+        var group = await GroupService.GetGroupByCodeAsync(groupCode);
+        if (group != null)
+        {
+            var userId = this.UserIdentityProcessor.GetCurrentUserId().Result;
+
+            if (userId != null)
+            {
+                var groupUser = new GroupUser
+                    {
+                        GroupId = group.Id,
+                        UserId = userId.ToString()
+                    };
+
+                await GroupUserService.AddGroupUserAsync(groupUser);
+                MudDialog.Close(DialogResult.Ok(true));
+            }
+            else
+            {
+                // Show error message: User not authenticated
+            }
+        }
+        else
+        {
+            // Show error message: Group not found
+        }
+    }
+}

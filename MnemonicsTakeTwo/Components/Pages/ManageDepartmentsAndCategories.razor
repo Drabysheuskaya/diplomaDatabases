@@ -1,0 +1,158 @@
+﻿@rendermode InteractiveServer
+@page "/manage-departments"
+@using MnemonicsTakeTwo.Data
+@using MnemonicsTakeTwo.Services
+@inject IDepartmentService DepartmentService
+@inject ICategoryService CategoryService
+@inject NavigationManager Navigation
+@inject IDialogService DialogService
+@using Microsoft.AspNetCore.Authorization
+@attribute [Authorize]
+
+<h3>Manage Departments and Categories</h3>
+
+@if (departments == null)
+{
+    <p>Loading...</p>
+}
+else if (departments.Count == 0)
+{
+    <p>No departments found.</p>
+    <MudButton Variant="Variant.Filled" Color="Color.Primary" OnClick="ShowAddDepartmentDialog">Add Department</MudButton>
+}
+else
+{
+    <MudTable Items="departments" Hover="true">
+        <HeaderContent>
+            <MudTh>Name</MudTh>
+            <MudTh>Actions</MudTh>
+        </HeaderContent>
+        <RowTemplate>
+            <MudTd DataLabel="Name">@context.Name</MudTd>
+            <MudTd DataLabel="Actions">
+                <MudButton Variant="Variant.Filled" Color="Color.Primary" OnClick="() => EditDepartment(context.Id)">Edit</MudButton>
+                <MudButton Variant="Variant.Outlined" Color="Color.Error" OnClick="() => ConfirmDeleteDepartment(context.Id)">Delete</MudButton>
+                <MudButton Variant="Variant.Filled" Color="Color.Secondary" OnClick="() => ViewCategories(context.Id)">View Categories</MudButton>
+            </MudTd>
+        </RowTemplate>
+    </MudTable>
+    <MudButton Variant="Variant.Filled" Color="Color.Primary" OnClick="ShowAddDepartmentDialog">Add Department</MudButton>
+}
+
+@if (selectedDepartment != null)
+{
+    <h4>Categories for @selectedDepartment.Name</h4>
+    <MudTable Items="categories" Hover="true">
+        <HeaderContent>
+            <MudTh>Name</MudTh>
+            <MudTh>Actions</MudTh>
+        </HeaderContent>
+        <RowTemplate>
+            <MudTd DataLabel="Name">@context.Name</MudTd>
+            <MudTd DataLabel="Actions">
+                <MudButton Variant="Variant.Filled" Color="Color.Primary" OnClick="() => EditCategory(context.Id)">Edit</MudButton>
+                <MudButton Variant="Variant.Outlined" Color="Color.Error" OnClick="() => ConfirmDeleteCategory(context.Id)">Delete</MudButton>
+            </MudTd>
+        </RowTemplate>
+    </MudTable>
+    <MudButton Variant="Variant.Filled" Color="Color.Primary" OnClick="ShowAddCategoryDialog">Add Category</MudButton>
+}
+
+@code {
+    private List<Department> departments;
+    private List<Category> categories;
+    private Department selectedDepartment;
+
+    protected override async Task OnInitializedAsync()
+    {
+        departments = (await DepartmentService.GetDepartmentsAsync()).ToList();
+    }
+
+    private void EditDepartment(int departmentId)
+    {
+        Navigation.NavigateTo($"/edit-department/{departmentId}");
+    }
+
+    private async Task ConfirmDeleteDepartment(int departmentId)
+    {
+        var parameters = new DialogParameters { ["ContentText"] = "Are you sure you want to delete this department?" };
+        var options = new DialogOptions { CloseButton = true, MaxWidth = MaxWidth.Small, FullWidth = true };
+        var dialog = DialogService.Show<ConfirmDialog>("Confirm Delete", parameters, options);
+        var result = await dialog.Result;
+
+        if (!result.Canceled)
+        {
+            await DeleteDepartment(departmentId);
+        }
+    }
+
+    private async Task DeleteDepartment(int departmentId)
+    {
+        await DepartmentService.DeleteDepartmentAsync(departmentId);
+        departments = (await DepartmentService.GetDepartmentsAsync()).ToList();
+        selectedDepartment = null;
+        categories = null;
+    }
+
+    private async Task ViewCategories(int departmentId)
+    {
+        selectedDepartment = await DepartmentService.GetDepartmentByIdAsync(departmentId);
+        categories = (await CategoryService.GetCategoriesByDepartmentIdAsync(departmentId)).ToList();
+    }
+
+    private void EditCategory(int categoryId)
+    {
+        Navigation.NavigateTo($"/edit-category/{categoryId}");
+    }
+
+    private async Task ConfirmDeleteCategory(int categoryId)
+    {
+        var parameters = new DialogParameters { ["ContentText"] = "Are you sure you want to delete this category?" };
+        var options = new DialogOptions { CloseButton = true, MaxWidth = MaxWidth.Small, FullWidth = true };
+        var dialog = DialogService.Show<ConfirmDialog>("Confirm Delete", parameters, options);
+        var result = await dialog.Result;
+
+        if (!result.Canceled)
+        {
+            await DeleteCategory(categoryId);
+        }
+    }
+
+    private async Task DeleteCategory(int categoryId)
+    {
+        await CategoryService.DeleteCategoryAsync(categoryId);
+        categories = (await CategoryService.GetCategoriesByDepartmentIdAsync(selectedDepartment.Id)).ToList();
+    }
+
+    private void ShowAddDepartmentDialog()
+    {
+        var parameters = new DialogParameters();
+        var options = new DialogOptions { CloseButton = true, MaxWidth = MaxWidth.Small, FullWidth = true };
+        var dialog = DialogService.Show<AddDepartmentDialog>("Add Department", parameters, options);
+        dialog.Result.ContinueWith(async result =>
+        {
+            if (!result.Result.Canceled)
+            {
+                departments = (await DepartmentService.GetDepartmentsAsync()).ToList();
+            }
+        });
+    }
+
+    private void ShowAddCategoryDialog()
+    {
+        var parameters = new DialogParameters { ["DepartmentId"] = selectedDepartment.Id };
+        var options = new DialogOptions { CloseButton = true, MaxWidth = MaxWidth.Small, FullWidth = true };
+        var dialog = DialogService.Show<AddCategoryDialog>("Add Category", parameters, options);
+        dialog.Result.ContinueWith(async result =>
+        {
+            if (!result.Result.Canceled)
+            {
+                categories = (await CategoryService.GetCategoriesByDepartmentIdAsync(selectedDepartment.Id)).ToList();
+            }
+        });
+    }
+}
+
+
+
+

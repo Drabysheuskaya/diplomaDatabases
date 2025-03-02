@@ -1,0 +1,65 @@
+﻿@rendermode InteractiveServer
+@page "/groups"
+@using MnemonicsTakeTwo.Data
+@using MnemonicsTakeTwo.Services
+@inject IGroupService GroupService
+@inject IGroupUserService GroupUserService
+@inject IUserIdentityProcessor UserIdentityProcessor
+@inject NavigationManager Navigation
+@inject AuthenticationStateProvider AuthenticationStateProvider
+@inject IDialogService DialogService
+@using Microsoft.AspNetCore.Authorization
+@attribute [Authorize]
+
+<h3>Groups</h3>
+
+<MudGrid>
+    @foreach (var group in groups)
+    {
+        <MudItem xs="12" sm="6" md="4" lg="3">
+            <MudCard>
+                <MudCardContent>
+                    <MudText Typo="Typo.h6">@group.Name</MudText>
+                    <MudText Typo="Typo.body2">@group.Description</MudText>
+                </MudCardContent>
+                <MudCardActions>
+                    <MudButton Variant="Variant.Filled" Color="Color.Primary" OnClick="() => NavigateToGroupMnemonics(group.Id)">View Mnemonics</MudButton>
+                    <MudButton Variant="Variant.Filled" Color="Color.Secondary" OnClick="() => NavigateToFlashcards(group.Id)">Flashcards</MudButton>
+                </MudCardActions>
+            </MudCard>
+        </MudItem>
+    }
+</MudGrid>
+
+<MudButton Variant="Variant.Filled" Color="Color.Primary" OnClick="ShowJoinGroupDialog">Join Group</MudButton>
+
+@code {
+    private List<Group> groups = new();
+    private string currentUserId;
+
+    protected override async Task OnInitializedAsync()
+    {
+        currentUserId = this.UserIdentityProcessor.GetCurrentUserId().Result;
+
+        var groupUsers = await GroupUserService.GetGroupUsersAsync();
+        var userGroupIds = groupUsers.Where(gu => gu.User.Id == currentUserId).Select(gu => gu.GroupId).ToList();
+
+        groups = (await GroupService.GetGroupsAsync()).Where(g => userGroupIds.Contains(g.Id)).ToList();
+    }
+
+    private void NavigateToGroupMnemonics(int groupId)
+    {
+        Navigation.NavigateTo($"/group/{groupId}/mnemonics");
+    }
+
+    private void NavigateToFlashcards(int groupId)
+    {
+        Navigation.NavigateTo($"/group-mnemonics/{groupId}");
+    }
+
+    private void ShowJoinGroupDialog()
+    {
+        var options = new DialogOptions { CloseButton = true, MaxWidth = MaxWidth.Small, FullWidth = true };
+        DialogService.Show<JoinGroupDialog>("Join Group", options);
+    }
+}

@@ -1,0 +1,61 @@
+﻿@rendermode InteractiveServer
+@page "/mnemonic/{mnemonicId:int}"
+@using MnemonicsTakeTwo.Data
+@using MnemonicsTakeTwo.Services
+@inject IMnemonicService MnemonicService
+@inject IFavoriteMnemonicService FavoriteMnemonicService
+@inject IUserIdentityProcessor UserIdentityProcessor
+@inject IJSRuntime JSRuntime
+
+<MudButton OnClick="GoBack">Go Back</MudButton>
+
+<MudPaper Class="pa-4">
+    <MudText Typo="Typo.h4">Mnemonic Details</MudText>
+    <MudDivider Class="my-2" />
+
+    <MudTextField @bind-Value="mnemonic.Name" Label="Name" ReadOnly="true" FullWidth="true" />
+    <MudTextField @bind-Value="mnemonic.Phrase" Label="Phrase" ReadOnly="true" FullWidth="true" Variant="Variant.Outlined" Lines="4" />
+    <MudTextField @bind-Value="mnemonic.Description" Label="Description" ReadOnly="true" FullWidth="true" Variant="Variant.Outlined" Lines="4" />
+
+    @if (mnemonic.Image != null)
+    {
+        <MudImage Src="@ImageSrc" Alt="Mnemonic Image" Style="max-width: 100%; height: auto;" />
+    }
+
+    <MudButton Variant="Variant.Filled" Color="Color.Primary" OnClick="AddToFavorites" Disabled="isFavorite">Add to Favorites</MudButton>
+</MudPaper>
+
+@code {
+    [Parameter]
+    public int mnemonicId { get; set; }
+
+    private Mnemonic mnemonic = new();
+    private string currentUserId;
+    private bool isFavorite;
+
+    protected override async Task OnInitializedAsync()
+    {
+        currentUserId = this.UserIdentityProcessor.GetCurrentUserId().Result;
+
+        mnemonic = await MnemonicService.GetMnemonicByIdAsync(mnemonicId);
+        isFavorite = await FavoriteMnemonicService.IsFavoriteMnemonicAsync(currentUserId, mnemonicId);
+    }
+
+    private string ImageSrc => mnemonic.Image != null ? $"data:image/png;base64,{Convert.ToBase64String(mnemonic.Image)}" : string.Empty;
+
+    private async Task GoBack()
+    {
+        await JSRuntime.InvokeVoidAsync("history.back");
+    }
+
+    private async Task AddToFavorites()
+    {
+        await FavoriteMnemonicService.AddFavoriteMnemonicAsync(new FavoriteMnemonic
+            {
+                MnemonicId = mnemonicId,
+                UserId = currentUserId
+            });
+        isFavorite = true;
+    }
+}
+
